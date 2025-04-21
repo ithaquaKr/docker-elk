@@ -4,15 +4,16 @@
 #
 server.name: kibana
 server.host: 0.0.0.0
-elasticsearch.hosts: [ http://elasticsearch:9200 ]
+elasticsearch.hosts: [http://elasticsearch:9200]
 
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
 
 ## X-Pack security credentials
 #
-elasticsearch.username: kibana_system
+elasticsearch.username: elastic
 elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
+elasticsearch.ssl.verificationMode: "none"
 
 ## Encryption keys (optional but highly recommended)
 ##
@@ -30,15 +31,15 @@ elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
 ## Fleet
 ## https://www.elastic.co/guide/en/kibana/current/fleet-settings-kb.html
 #
-xpack.fleet.agents.fleet_server.hosts: [ http://fleet-server:8220 ]
+xpack.fleet.agents.fleet_server.hosts: [http://fleet-server:8220]
 
 xpack.fleet.outputs:
   - id: fleet-default-output
     name: default
     type: elasticsearch
-    hosts: [ http://elasticsearch:9200 ]
+    hosts: [http://elasticsearch:9200]
     is_default: true
-    is_default_monitoring: true
+    # is_default_monitoring: true
 
 xpack.fleet.packages:
   - name: fleet_server
